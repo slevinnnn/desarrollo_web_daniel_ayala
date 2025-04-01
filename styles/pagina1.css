@@ -1,7 +1,8 @@
 
 .encabezado{
   /*border: 3px solid #33efdd;*/
-  background-color:rgb(14, 14, 58);
+  /*background-color:rgb(14, 14, 58);*/
+  background-color: rgb(14, 14, 58);
   color: whitesmoke;
   border-radius: 15px;
   height: 30vh;
@@ -21,11 +22,12 @@
   height:70vh;
   width: 100%;
   align-items: center;
+  /*background-color:rgb(240, 248, 255);*/
   background-color:azure;
 }
 
 .caja{
-  border: 4px rgb(14, 14, 58) solid;
+  border: 4px rgb(14, 14, 178) solid;
   border-radius: 15px;
   height: 80%;
   width: 28vw;

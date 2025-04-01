@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/añadir_actividad.css">
+
+  </head>
+  <body>
+    <div class="contenedor_principal">
+      <div class="contenedor_validador">
+
+      </div>
+      <div class="contenedor_formulario" id="contenedor_formulario">
+
+        <form name="formulario_quien" class="formulario" method="post" enctype="multipart/form-data">
+          <label for="nombre">Nombre</label>
+          <input type="nombre" name="nombre" id="nombre"  maxlength="80"><br>
+
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" minlength="15" ><br>
+
+          <label for="phone">Phone</label>
+          <input type="text" name="phone" id="phone" minlength="8" ><br>
+          <label for="contactar_por">Forma de contacto</label>
+          <select name="contactar_por" id="contactar_por" >
+              <option value="">Seleccione una forma de contacto </option>
+          </select><br>
+          <button type="button" class="btn_siguiente" id="1">Siguiente</button>
+        </form>
+        <br>
+
+        <form name="formulario_donde" class="formulario" method="post" enctype="multipart/form-data">
+
+          <label for="select-region">Region</label>
+          <select name="select-region" id="select-region" >
+              <option value="">Seleccione una Region</option>
+          </select><br>
+
+          <label for="select-comuna">Comuna</label>
+          <select name="select-comuna" id="select-comuna" >
+              <option value="">Seleccione una comuna</option>
+          </select><br>
+          <label for="sector">Sector</label>
+          <input type="sector" name="sector" id="sector" maxlength="100"><br>
+
+          <button type="button" class="btn_siguiente" id="2">Siguiente</button>
+
+        </form><br>
+
+        <form name="formulario_cuando" class="formulario" method="post" enctype="multipart/form-data">
+
+          <label for="fecha_inicio">Fecha de inicio</label>
+          <input type="datetime-local" name="fecha_inicio" id="fecha_inicio" ><br>
+          
+          <label for="fecha_inicio">Fecha de inicio</label>
+          <input type="datetime-local" name="fecha_inicio" id="fecha_inicio" ><br>
+
+          <label for="tema">Comuna</label>
+          <select name="select_tema" id="select_tema" >
+              <option value="">Seleccione un Tema</option>
+          </select><br>
+          <button type="button" class="btn_siguiente" id="3">Terminar y enviar</button>
+
+
+        </form>
+
+    </div>
+      
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <script type="module" src="scripts/agregar_actividad.js"></script>
+  </body>
+</html>
