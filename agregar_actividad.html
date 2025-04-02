@@ -24,25 +24,33 @@
           <select name="contactar_por" id="contactar_por" >
               <option value="">Seleccione una forma de contacto </option>
           </select><br>
-          <button type="button" class="btn_siguiente" id="1">Siguiente</button>
+          <div class="contenedor_botones">
+            <button type="button" class="btn_atras" id="1">Volver</button>
+            <button type="button" class="btn_siguiente" id="1">Siguiente</button>
+            
+          </div>
         </form>
         <br>
 
         <form name="formulario_donde" class="formulario" method="post" enctype="multipart/form-data">
 
           <label for="select-region">Region</label>
-          <select name="select-region" id="select-region" >
+          <select name="select_region" id="select_region" >
               <option value="">Seleccione una Region</option>
           </select><br>
 
           <label for="select-comuna">Comuna</label>
-          <select name="select-comuna" id="select-comuna" >
+          <select name="select_comuna" id="select_comuna" >
               <option value="">Seleccione una comuna</option>
           </select><br>
           <label for="sector">Sector</label>
           <input type="sector" name="sector" id="sector" maxlength="100"><br>
 
-          <button type="button" class="btn_siguiente" id="2">Siguiente</button>
+          <div class="contenedor_botones">
+            <button type="button" class="btn_atras" id="2">Volver</button>
+            <button type="button" class="btn_siguiente" id="2">Siguiente</button>
+            
+          </div>
 
         </form><br>
 
@@ -54,11 +62,15 @@
           <label for="fecha_inicio">Fecha de inicio</label>
           <input type="datetime-local" name="fecha_inicio" id="fecha_inicio" ><br>
 
-          <label for="tema">Comuna</label>
+          <label for="tema">Tema</label>
           <select name="select_tema" id="select_tema" >
               <option value="">Seleccione un Tema</option>
           </select><br>
-          <button type="button" class="btn_siguiente" id="3">Terminar y enviar</button>
+          <div class="contenedor_botones">
+            <button type="button" class="btn_atras" id="3">Volver</button>
+            <button type="button" class="btn_siguiente" id="3">Siguiente</button>
+            
+          </div>
 
 
         </form>
