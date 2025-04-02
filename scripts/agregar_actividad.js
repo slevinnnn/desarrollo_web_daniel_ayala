@@ -3,15 +3,17 @@ async function obtener_regiones_y_comunas() {
       const response = await fetch('region_comuna.json'); // Carga el archivo JSON
       if (!response.ok) throw new Error('Error al cargar el JSON'); // Manejo de errores
       const data = await response.json(); // Convierte la respuesta en un objeto JS
-      console.log(data.regiones[0].nombre);
-      console.log(data.regiones[1].id);   // 25
+      return data
+     /* console.log(data.regiones[0].nombre);
+      console.log(data.regiones[1].id);
+      console.log(data.regiones);*/
   } catch (error) {
       console.error(error);
   }
 }
 
-// Llamar a la función
-obtener_regiones_y_comunas();
+const regionesComunas=await obtener_regiones_y_comunas();
+console.log(regionesComunas.regiones[0].comunas[0].nombre)
 
 
 let contador=0;
@@ -44,13 +46,40 @@ document.querySelectorAll(".btn_atras").forEach((button) => {
 }
 );
 
-const poblarRegionComuna = () => {
+const poblarRegion = async () => {
   let regionSelect = document.getElementById("select_region");
-
-
-
+  let regiones= regionesComunas.regiones;
+  //console.log(regiones)
+  for(let i=0;i<regiones.length;i++){
+    //console.log(regiones[i].nombre)
+    let option = document.createElement("option");
+    option.value = regiones[i].id;
+    option.textContent = regiones[i].nombre;
+    regionSelect.appendChild(option);
+  }
 
 }
+await poblarRegion();
+
+const poblarComuna =  () => {
+  let regionSelect = document.getElementById("select_region");
+  let comunaSelect = document.getElementById("select_comuna");
+  let regionValue = Number(regionSelect.value)-1;
+  if(regionValue){
+    console.log(regionValue)
+    let comunas=regionesComunas.regiones[regionValue].comunas
+    for(let i=0;i<comunas.length;i++){
+      let option = document.createElement("option");
+      option.value = comunas[i].id;
+      option.textContent = comunas[i].nombre;
+      comunaSelect.appendChild(option);
+    }
+
+  }
+  
+
+}
+document.getElementById("select_region").addEventListener("change",poblarComuna);
 
 
 
