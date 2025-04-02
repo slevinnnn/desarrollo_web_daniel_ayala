@@ -64,6 +64,15 @@ await poblarRegion();
 const poblarComuna =  () => {
   let regionSelect = document.getElementById("select_region");
   let comunaSelect = document.getElementById("select_comuna");
+  //este codigo borra las previas comunas de la region seleccionada
+  comunaSelect.innerHTML='';
+  let placeholderOption = document.createElement("option");
+  placeholderOption.textContent = 'Seleccione una comuna';
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;  
+  comunaSelect.appendChild(placeholderOption);
+  //fin del codigo de borrado
+
   let regionValue = Number(regionSelect.value)-1;
   if(regionValue){
     console.log(regionValue)
