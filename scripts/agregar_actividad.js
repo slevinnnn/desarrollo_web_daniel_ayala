@@ -12,10 +12,13 @@ async function obtener_regiones_y_comunas() {
   }
 }
 
+//data para todos los selects del formulario
 const regionesComunas=await obtener_regiones_y_comunas();
-console.log(regionesComunas.regiones[0].comunas[0].nombre)
+const formaDeContacto=["Whatsapp","Telegram","X","Instagram","TikTok","Otra"];
+const temas=["Musica","Deportes","Ciencias","Religion","Politica","Tecnologia","Juegos","Baile","Comida","Otros"];
 
 
+//funcionalidad de avanzar y retroceder en los botones del formulario
 let contador=0;
 const  nextStep = (step) => {
   console.log(contador)
@@ -45,6 +48,18 @@ document.querySelectorAll(".btn_atras").forEach((button) => {
   });
 }
 );
+
+
+const poblarContactar =  () => {
+  let contactarSelect = document.getElementById("contactar_por");
+  formaDeContacto.forEach(contacto =>{
+    let option = document.createElement("option");
+    option.value = contacto;
+    option.textContent = contacto;
+    contactarSelect.appendChild(option);
+  })
+}
+poblarContactar();
 
 const poblarRegion = async () => {
   let regionSelect = document.getElementById("select_region");
@@ -85,9 +100,18 @@ const poblarComuna =  () => {
     }
 
   }
-  
-
 }
+
+const poblarTema =  () => {
+  let temaSelect = document.getElementById("select_tema");
+  temas.forEach(tema =>{
+    let option = document.createElement("option");
+    option.value = tema;
+    option.textContent = tema;
+    temaSelect.appendChild(option);
+  })
+}
+poblarTema();
 document.getElementById("select_region").addEventListener("change",poblarComuna);
 
 
