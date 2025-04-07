@@ -6,8 +6,9 @@
   </head>
   <body>
     <div class="contenedor_principal">
-      <div class="contenedor_validador">
-
+      <div class="contenedor_validador" id="contenedor_validador" hidden>
+        <h2 id="val-msg"></h2>
+        <ul id="val-list"></ul>
       </div>
       <div class="contenedor_formulario" id="contenedor_formulario">
 
@@ -19,7 +20,7 @@
           <input type="email" name="email" id="email" minlength="15" ><br>
 
           <label for="phone">Phone</label>
-          <input type="text" name="phone" id="phone" minlength="8" ><br>
+          <input type="tel" name="phone" id="phone" minlength="8" ><br>
           <label for="contactar_por">Forma de contacto</label>
           <select name="contactar_por" id="contactar_por" >
               <option value="">Seleccione una forma de contacto </option>
@@ -46,6 +47,9 @@
           <label for="sector">Sector</label>
           <input type="sector" name="sector" id="sector" maxlength="100"><br>
 
+          <label for="reason" style="display: none;">ingrese informacion de contacto</label>
+          <input type="text" name="comments" id="comments"style="display: none;"></input><br>
+
           <div class="contenedor_botones">
             <button type="button" class="btn_atras" id="2">Volver</button>
             <button type="button" class="btn_siguiente" id="2">Siguiente</button>
@@ -59,8 +63,8 @@
           <label for="fecha_inicio">Fecha de inicio</label>
           <input type="datetime-local" name="fecha_inicio" id="fecha_inicio" ><br>
           
-          <label for="fecha_inicio">Fecha de inicio</label>
-          <input type="datetime-local" name="fecha_inicio" id="fecha_inicio" ><br>
+          <label for="fecha_termino">Fecha de termino</label>
+          <input type="datetime-local" name="fecha_termino" id="fecha_termino" ><br>
 
           <label for="tema">Tema</label>
           <select name="select_tema" id="select_tema" >
@@ -68,7 +72,7 @@
           </select><br>
           <div class="contenedor_botones">
             <button type="button" class="btn_atras" id="3">Volver</button>
-            <button type="button" class="btn_siguiente" id="3">Siguiente</button>
+            <button type="button" class="btn_siguiente" id="31">Siguiente</button>
             
           </div>
 
