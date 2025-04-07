@@ -252,6 +252,9 @@ const validateForm = () => {
   if (!validateComuna(comuna)) {
     setInvalidInput("Comuna");
   }
+  if(!validateSector(sector)){
+    setInvalidInput("Sector");
+  }
 
   // finalmente mostrar la validación
   let validationBox = document.getElementById("contenedor_validador");
