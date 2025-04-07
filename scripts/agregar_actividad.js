@@ -25,13 +25,13 @@ const  nextStep = (step) => {
   console.log(step)*/
     if (step >= 3) return;
     contador=step;
-    document.getElementById("contenedor_formulario").style.transform = `translateX(-${contador * 33.33}%)`;
+    document.getElementById("contenedor_formulario").style.transform = `translateX(-${contador * 34}%)`;
 }
 const  backStep = (step) => {
   /*console.log(contador)
   console.log(step)*/
     if (step <= 1) return;
-    document.getElementById("contenedor_formulario").style.transform = `translateX(-${(step-2)* 33.33}%)`;
+    document.getElementById("contenedor_formulario").style.transform = `translateX(-${(step-2)* 34}%)`;
 }
 
 document.querySelectorAll(".btn_siguiente").forEach((button) => {
@@ -92,7 +92,6 @@ const poblarComuna =  () => {
 
   let regionValue = Number(regionSelect.value)-1;
   if(regionValue){
-    console.log(regionValue)
     let comunas=regionesComunas.regiones[regionValue].comunas
     for(let i=0;i<comunas.length;i++){
       let option = document.createElement("option");
@@ -192,23 +191,39 @@ const validateSector = (sector) =>{
 
 }
 const validateInfoContacto = (info) =>{
+  console.log(info)
   let lengthValid =info.length>4 && info.length <= 50 ;
   return lengthValid;
 
 }
+
+const validateRegion = (region) => {
+  if(region){
+  let valido=regionesComunas.regiones[Number(region)-1].nombre.length>0
+  return valido;
+  }
+  return false;
+};
+const validateComuna = (comuna) => {
+  let valido=false;
+  if(comuna!=0) valido=true;
+  return valido;
+};
 
 const validateFechaTermino = (fecha_inicio,fecha_termino) =>{
 }
 
 const validateForm = () => {
   // obtener elementos del DOM usando el nombre del formulario.
-  let myForm = document.forms["formulario_quien"];
-  let email = myForm["email"].value;
-  let phoneNumber = myForm["phone"].value;
-  let name = myForm["nombre"].value;
-  let contactar = myForm["contactar_por"].value;
-  /*let region = myForm["select_region"].value;
-  let comuna = myForm["select_comuna"].value;*/
+  let myForm_quien = document.forms["formulario_quien"];
+  let myForm_donde = document.forms["formulario_donde"];
+  let myForm_cuando = document.forms["formulario_cuando"];
+  let email = myForm_quien["email"].value;
+  let phoneNumber = myForm_quien["phone"].value;
+  let name = myForm_quien["nombre"].value;
+  let contactar = myForm_quien["contactar_por"].value;
+  let region = myForm_donde["select_region"].value;
+  let comuna = myForm_donde["select_comuna"].value;
 
   // variables auxiliares de validación y función.
   let invalidInputs = [];
@@ -231,15 +246,16 @@ const validateForm = () => {
   if (!validateInfoContacto(contactar)) {
     setInvalidInput("Forma de contacto");
   }
-  /*if (!validateSelect(region)) {
+  if (!validateRegion(region)) {
     setInvalidInput("Region");
   }
-  if (!validateSelect(comuna)) {
+  if (!validateComuna(comuna)) {
     setInvalidInput("Comuna");
-  }*/
+  }
 
   // finalmente mostrar la validación
   let validationBox = document.getElementById("contenedor_validador");
+  let validationform = document.querySelector(".contenedor_formulario");
   let validationMessageElem = document.getElementById("val-msg");
   let validationListElem = document.getElementById("val-list");
   let formContainer = document.querySelector(".contenedor_principal");
@@ -261,32 +277,66 @@ const validateForm = () => {
 
     // hacer visible el mensaje de validación
     validationBox.hidden = false;
+    formContainer.style.height ="600px";
+    validationBox.style.height="200px"
+    validationform.style.height="400px"
   } else {
     // Ocultar el formulario
-    myForm.style.display = "none";
+    myForm_cuando.style.display = "none";
+ 
 
     // establecer mensaje de éxito
-    validationMessageElem.innerText = "¡Formulario válido! ¿Deseas enviarlo o volver?";
+    validationMessageElem.innerText = "¡Formulario válido! ¿Esta seguro que desea enviar esta actividad?";
     validationListElem.textContent = "";
+
+    validationListElem.style.display = "flex";
+    validationListElem.style.justifyContent = "space-between";
+  
 
     // aplicar estilos de éxito
     validationBox.style.backgroundColor = "#ddffdd";
     validationBox.style.borderLeftColor = "#4CAF50";
 
+
     // Agregar botones para enviar el formulario o volver
     let submitButton = document.createElement("button");
-    submitButton.innerText = "Enviar";
-    submitButton.style.marginRight = "10px";
+    submitButton.style.width="200px";
+    submitButton.style.height="50px";
+    submitButton.innerText = "Si, estoy seguro!";
+
+    const confirmMessage = () => {
+        validationMessageElem.innerText = "“Hemos recibido su información, muchas gracias y suerte en su actividad” ";
+        validationBox.style.border="2px solid #4CAF50";
+        validationBox.style.display="flex";
+        validationBox.style.flexDirection="column";
+        validationBox.style.alignItems="center";
+        validationBox.style.padding="5px";
+        validationListElem.removeChild(submitButton)
+        validationListElem.removeChild(backButton)
+        let returnHome=document.createElement("button");
+        returnHome.innerText="Volver al inicio";
+        //returnHome.style.width="200px";
+        //returnHome.style.height="50px";
+        returnHome.style.marginBottom="15px";
+        returnHome.addEventListener("click", () => {
+          window.location.href = "index.html";
+        })
+
+        validationBox.appendChild(returnHome);
+    };
     submitButton.addEventListener("click", () => {
-      // myForm.submit();
-      // no tenemos un backend al cual enviarle los datos
+      confirmMessage();
     });
 
+
     let backButton = document.createElement("button");
-    backButton.innerText = "Volver";
+    backButton.style.width="200px";
+    backButton.style.height="50px";
+    backButton.style.marginLeft="35px";
+    backButton.innerText = "No,no estoy seguro,volver al formulario";
     backButton.addEventListener("click", () => {
       // Mostrar el formulario nuevamente
-      myForm.style.display = "block";
+      myForm_cuando.style.display = "";
       validationBox.hidden = true;
     });
 
@@ -301,6 +351,7 @@ const validateForm = () => {
 
 let submitBtn = document.getElementById("31");
 submitBtn.addEventListener("click", validateForm);
+
 
 
 

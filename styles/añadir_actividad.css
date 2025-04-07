@@ -42,3 +42,12 @@ body{
   display: flex;
   justify-content: space-around;
 }
+.btn_agregar_actividad,button{
+  background-color: rgb(24, 24, 97);
+  color: white;
+  border: none;
+  height: 40px;
+  width: 110px;
+  border-radius: 5px;
+  cursor: pointer;
+}
