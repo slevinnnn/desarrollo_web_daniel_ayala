@@ -117,6 +117,12 @@ document.getElementById("select_region").addEventListener("change",poblarComuna)
 //fin de la funcionalidad para poblar los selects del formulario
 
 
+
+
+
+
+
+
 //funcionalidad para poblar datetime-local
 const poblarFechaInicio = () => {
   const dateInput = document.getElementById("fecha_inicio");
@@ -151,6 +157,10 @@ const poblarFechaTermino = () => {
 poblarFechaTermino();
 
 //
+
+
+
+
 
 //funcionalidad para validar el formulario
 const validateName = (name) => {
@@ -210,7 +220,35 @@ const validateComuna = (comuna) => {
   return valido;
 };
 
+const esFormatoFechaValido = (valor) => {
+  const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+  return regex.test(valor);
+};
+
+const validateFechaInicio = (fecha_inicio) =>{
+  if(!fecha_inicio) return false;
+  return esFormatoFechaValido(fecha_inicio);
+
+}
+
 const validateFechaTermino = (fecha_inicio,fecha_termino) =>{
+  if(!fecha_inicio) return false;
+  if(fecha_termino){
+    if (!esFormatoFechaValido(fecha_inicio) || !esFormatoFechaValido(fecha_termino)) {
+      return false;
+    }
+    const fechaInicio = new Date(fecha_inicio);
+    const fechaTermino = new Date(fecha_termino);
+
+    return fechaTermino > fechaInicio;
+  }
+  return true
+}
+
+const validateTema = (tema) => {
+  if(!tema) return false;
+  return true
+
 }
 
 const validateForm = () => {
@@ -224,6 +262,14 @@ const validateForm = () => {
   let contactar = myForm_quien["contactar_por"].value;
   let region = myForm_donde["select_region"].value;
   let comuna = myForm_donde["select_comuna"].value;
+  let sector = myForm_donde["sector"].value;
+  let fecha_inicio = myForm_cuando["fecha_inicio"].value;
+  let fecha_termino = myForm_cuando["fecha_termino"].value;
+  let tema = myForm_cuando["select_tema"].value;
+
+  console.log(fecha_inicio)
+  console.log(fecha_termino)
+  console.log(tema)
 
   // variables auxiliares de validación y función.
   let invalidInputs = [];
@@ -254,6 +300,15 @@ const validateForm = () => {
   }
   if(!validateSector(sector)){
     setInvalidInput("Sector");
+  }
+  if (!validateFechaInicio(fecha_inicio)) {
+    setInvalidInput("Fecha de inicio");
+  }
+  if (!validateFechaTermino(fecha_inicio,fecha_termino)) {
+    setInvalidInput("Fecha de término");
+  }
+  if (!validateTema(tema)) {
+    setInvalidInput("Tema");
   }
 
   // finalmente mostrar la validación
