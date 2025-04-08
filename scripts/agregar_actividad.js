@@ -111,9 +111,32 @@ const poblarTema =  () => {
     option.textContent = tema;
     temaSelect.appendChild(option);
   })
+  changeArguments();
 }
 poblarTema();
+
+function changeArguments() {
+  console.log("cambio de argumento")
+  const temaSelect = document.getElementById("select_tema");
+  const reasonLabel = document.querySelector("label[for='reason4']");
+  const reasonTextarea = document.getElementById("comments4");
+  console.log(temaSelect.value);
+  if (temaSelect.value == "Otros") {
+      console.log("cambio a otros")
+      reasonLabel.innerText = "Especifique el tema de la actividad";
+      reasonLabel.style.display = "";
+      reasonTextarea.style.display = "";
+  } else {
+      reasonLabel.style.display = "none";
+      reasonTextarea.style.display = "none";
+  }
+}
+
+
+document.getElementById("select_tema").addEventListener("change", changeArguments);
 document.getElementById("select_region").addEventListener("change",poblarComuna);
+
+
 //fin de la funcionalidad para poblar los selects del formulario
 
 
@@ -247,9 +270,35 @@ const validateFechaTermino = (fecha_inicio,fecha_termino) =>{
 
 const validateTema = (tema) => {
   if(!tema) return false;
+  if(tema=="Otros"){
+    let textarea=document.getElementById("comments4").value;
+    if(textarea.length<3 || textarea.length>15) return false;
+  }
   return true
 
 }
+
+const validateFiles = (files) => {
+  if (!files) return false;
+  console.log(files)
+
+  // validación del número de archivos
+  let lengthValid = 1 <= files.length && files.length <= 5;
+  console.log(lengthValid)
+
+  // validación del tipo de archivo
+  let typeValid = true;
+
+  for (const file of files) {
+    // el tipo de archivo debe ser "image/<foo>" o "application/pdf"
+    let fileFamily = file.type.split("/")[0];
+    typeValid &&= fileFamily == "image";
+  }
+
+  // devolvemos la lógica AND de las validaciones.
+  return lengthValid && typeValid;
+};
+
 
 const validateForm = () => {
   // obtener elementos del DOM usando el nombre del formulario.
@@ -266,6 +315,7 @@ const validateForm = () => {
   let fecha_inicio = myForm_cuando["fecha_inicio"].value;
   let fecha_termino = myForm_cuando["fecha_termino"].value;
   let tema = myForm_cuando["select_tema"].value;
+  let files = myForm_cuando["files"].files;
 
   console.log(fecha_inicio)
   console.log(fecha_termino)
@@ -310,6 +360,9 @@ const validateForm = () => {
   if (!validateTema(tema)) {
     setInvalidInput("Tema");
   }
+  if (!validateFiles(files)) {
+    setInvalidInput("Archivos");
+  }
 
   // finalmente mostrar la validación
   let validationBox = document.getElementById("contenedor_validador");
@@ -335,8 +388,8 @@ const validateForm = () => {
 
     // hacer visible el mensaje de validación
     validationBox.hidden = false;
-    formContainer.style.height ="600px";
-    validationBox.style.height="200px"
+    formContainer.style.height ="650px";
+    validationBox.style.height="250px"
     validationform.style.height="400px"
   } else {
     // Ocultar el formulario
