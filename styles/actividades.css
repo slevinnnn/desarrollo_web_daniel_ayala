@@ -6,8 +6,8 @@ body{
 .navbar{
   height: 10vh;
   width: 99vw;
-  background-color: azure;
-  border: 3px solid rgb(24, 24, 97);
+  background-color: rgb(14,14,58);
+  border: 3px solid aqua;
   border-radius: 2ch;
 }
 .navbar_menu{
@@ -84,6 +84,6 @@ img{
   height: 60px;
   width: 60px;
   object-fit: cover;
-  border: 2px solid rgb(54, 54, 213);
+  border: 2px solid aqua;
   border-radius: 2ch;
 }

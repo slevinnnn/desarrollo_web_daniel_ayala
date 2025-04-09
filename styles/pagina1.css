@@ -42,7 +42,7 @@
 .caja:hover {
   transform: scale(1.1);
 }
-.contenedor_historial{
+/*.contenedor_historial{
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -52,4 +52,39 @@
   width: 100%;
   border:3px rgb(14, 14, 58) solid;
   border-radius: 15px;
+}*/
+table {
+  width: 100%;
+  border-collapse: separate; /* para permitir separación entre filas */
+  border-spacing: 0 10px; /* espacio vertical entre filas (tr) */
+  font-size: 16px; /* tamaño de texto más grande */
+  border-radius: 2ch; /* esquinas redondeadas */
+  background-color: azure;
+
+}
+
+td {
+  padding: 12px 20px; /* espacio interno en celdas */
+  text-align: left;
+  background-color: white;
+  border: 1px solid aqua;
+}
+
+thead th {
+  background-color: #1b1757;
+  font-weight: bold;
+  color: white;
+  padding: 12px 20px; /* espacio interno en celdas */
+  text-align: left;
+  
+}
+
+tr {
+  transition: background-color 0.3s ease;
+  border: 1px solid #0c0c0c; /* borde de las filas */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* efecto hover */
+  cursor: pointer;
 }
