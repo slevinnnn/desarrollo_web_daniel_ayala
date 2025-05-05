@@ -8,33 +8,9 @@
   background-color: azure;
   margin-top: 30px;
 }
-img{
+.contenedor_principal img{
   width: 400px;
   height: 35vh;
   border: 2px solid rgb(14,14,68);
-  border-radius: 2ch;
-}
-.navbar{
-  height: 10vh;
-  width: 98vw;
-  background-color:rgb(14,14,68);
-  border: 3px solid aqua;
-  border-radius: 2ch;
-}
-.navbar_menu{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 30px;
-  gap: 40px;
-
-}
-.img_navbar{
-  height: 60px;
-  width: 60px;
-  object-fit: cover;
-  border: 2px solid aqua;
   border-radius: 2ch;
 }
