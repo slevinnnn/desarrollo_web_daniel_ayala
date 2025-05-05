@@ -22,3 +22,16 @@ app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 def index():
     
     return render_template("index.html")
+
+@app.route("/estadisticas")
+def estadisticas():
+    return render_template("estadisticas.html")
+
+@app.route("/actividades")
+def actividades():
+    return render_template("actividades.html")
+
+@app.route("/agregar_actividad")
+def agregarActividad():
+    return render_template("agregar_actividad.html")
+
