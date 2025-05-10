@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/actividades.css">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar_menu">
+        <a href="index.html"> <img src="public/home-logo.jpeg"></img></a>
+        <a href="agregar_actividad.html"> <img src="public/añadir.png"></img></a>
+        <a href="estadisticas.html"> <img src="public/Estadisticas-de-ventas.jpg"></img></a>
+      </div>
+    </nav>
+    <table border="1" id="mi_tabla">
+      <thead>
+        <tr>
+          <th>Inicio</th>
+          <th>Término</th>
+          <th>Comuna</th>
+          <th>Sector</th>
+          <th>Tema</th>
+          <th>Nombre Organizador</th>
+          <th>Total Fotos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Puedes ir agregando filas como esta -->
+        <tr id="actividad1">
+          <td>2025-04-08T10:00</td>
+          <td>2025-04-08T13:00</td>
+          <td>Puente Alto</td>
+          <td>Centro</td>
+          <td>Medio Ambiente</td>
+          <td>Juan Pérez</td>
+          <td>12</td>
+        </tr>
+        <tr id="actividad2">
+          <td>2025-05-08T10:00</td>
+          <td>2025-05-08T13:00</td>
+          <td>Las Condes</td>
+          <td>Cerro las condes</td>
+          <td>deporte</td>
+          <td>Jan Pérez</td>
+          <td>12</td>
+        </tr>
+        <tr id="actividad3">
+          <td>2025-06-08T10:00</td>
+          <td>2025-06-08T13:00</td>
+          <td>Vitacura</td>
+          <td>parque de vitacura</td>
+          <td>musica</td>
+          <td>Jhon Pérez</td>
+          <td>12</td>
+        </tr>
+        <tr id="actividad4">
+          <td>2025-07-08T11:00</td>
+          <td>2025-07-08T13:00</td>
+          <td>Cerrillos</td>
+          <td>parque de cerrillos</td>
+          <td>ciencias</td>
+          <td>Jhun Pérez</td>
+          <td>12</td>
+        </tr>
+        <tr id="actividad5">
+          <td>2025-06-08T12:00</td>
+          <td>2025-06-08T13:00</td>
+          <td>providencia</td>
+          <td>parque ines de suarez </td>
+          <td>baile</td>
+          <td>Jhin Pérez</td>
+          <td>12</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="contenedor_resumen" id="contenedor_resumen" style="display: none;">
+      <div id="resumen" class="resumen"></div>
+      <div class="cont_btn">
+        <button id="back_btn" class="back_btn">Volver</button>
+        <button id="home_btn" class="home_btn">Home</button>
+      </div>
+    </div>
+
+
+
+
+
+
+    <script type="module" src="scripts/actividades.js"></script>
+  </body>
+</html>

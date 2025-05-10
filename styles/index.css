@@ -1,0 +1,95 @@
+
+.encabezado{
+  /*border: 3px solid #33efdd;*/
+  /*background-color:rgb(14, 14, 58);*/
+  background-color: rgb(14, 14, 58);
+  color: whitesmoke;
+  border-radius: 15px;
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /*margin-bottom: 10px;*/
+}
+.contenedor_principal{
+  display: flex;
+  /*border: 2px solid #000;*/
+  flex-direction: row;
+  justify-content: space-evenly;
+  height:70vh;
+  width: 100%;
+  align-items: center;
+  /*background-color:rgb(240, 248, 255);*/
+  background-color:azure;
+}
+
+.caja{
+  border: 4px rgb(14, 14, 178) solid;
+  border-radius: 15px;
+  height: 80%;
+  width: 28vw;
+  transition: transform 0.3s ease-in-out;
+}
+
+.icono{
+  width: 100%;
+  height: 100%;
+  object-fit:scale-down;
+}
+.caja:hover {
+  transform: scale(1.1);
+}
+/*.contenedor_historial{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.historial{
+  height: 100px;
+  width: 100%;
+  border:3px rgb(14, 14, 58) solid;
+  border-radius: 15px;
+}*/
+table {
+  width: 100%;
+  border-collapse: separate; /* para permitir separación entre filas */
+  border-spacing: 0 10px; /* espacio vertical entre filas (tr) */
+  font-size: 16px; /* tamaño de texto más grande */
+  border-radius: 2ch; /* esquinas redondeadas */
+  background-color: azure;
+
+}
+
+td {
+  padding: 12px 20px; /* espacio interno en celdas */
+  text-align: left;
+  background-color: white;
+  border: 1px solid aqua;
+}
+
+thead th {
+  background-color: #1b1757;
+  font-weight: bold;
+  color: white;
+  padding: 12px 20px; /* espacio interno en celdas */
+  text-align: left;
+  
+}
+
+tr {
+  transition: background-color 0.3s ease;
+  border: 1px solid #0c0c0c; /* borde de las filas */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* efecto hover */
+  cursor: pointer;
+}
+td img{
+  width: 100px;
+  height: 60px;
+  object-fit:cover;
+}

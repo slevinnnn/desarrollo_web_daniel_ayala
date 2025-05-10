@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/añadir_actividad.css">
+
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar_menu">
+        <a href="index.html"> <img src="public/home-logo.jpeg"></img></a>
+        <a href="actividades.html"> <img src="public/actividades_3.jpg"></img></a>
+        <a href="estadisticas.html"> <img src="public/Estadisticas-de-ventas.jpg"></img></a>
+      </div>
+    </nav>
+    <div class="contenedor_principal">
+      <div class="contenedor_validador" id="contenedor_validador" hidden>
+        <h2 id="val-msg"></h2>
+        <ul id="val-list"></ul>
+      </div>
+      <div class="contenedor_formulario" id="contenedor_formulario">
+
+        <form name="formulario_quien" class="formulario" method="post" enctype="multipart/form-data">
+          <label for="nombre">Nombre</label>
+          <input type="nombre" name="nombre" id="nombre"  maxlength="80"><br>
+
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email"  ><br>
+
+          <label for="phone">Phone</label>
+          <input type="tel" name="phone" id="phone" minlength="8" ><br>
+          <label for="contactar_por">Forma de contacto</label>
+          <select name="contactar_por" id="contactar_por" >
+              <option value="">Seleccione una forma de contacto </option>
+          </select><br>
+          <div class="contenedor_botones">
+            <button type="button" class="btn_atras" id="1">Volver</button>
+            <button type="button" class="btn_siguiente" id="1">Siguiente</button>
+            
+          </div>
+        </form>
+        <br>
+
+        <form name="formulario_donde" class="formulario" method="post" enctype="multipart/form-data">
+
+          <label for="select_region">Region</label>
+          <select name="select_region" id="select_region" >
+              <option value="">Seleccione una Region</option>
+          </select><br>
+
+          <label for="select_comuna">Comuna</label>
+          <select name="select_comuna" id="select_comuna" >
+              <option value="">Seleccione una comuna</option>
+          </select><br>
+          <label for="sector">Sector</label>
+          <input type="sector" name="sector" id="sector" maxlength="100"><br>
+
+          <label for="reason" style="display: none;">ingrese informacion de contacto</label>
+          <input type="text" name="comments" id="comments"style="display: none;"></input><br>
+
+          <div class="contenedor_botones">
+            <button type="button" class="btn_atras" id="2">Volver</button>
+            <button type="button" class="btn_siguiente" id="2">Siguiente</button>
+            
+          </div>
+
+        </form><br>
+
+        <form name="formulario_cuando" class="formulario" method="post" enctype="multipart/form-data">
+
+          <label for="fecha_inicio">Fecha de inicio</label>
+          <input type="datetime-local" name="fecha_inicio" id="fecha_inicio" ><br>
+          
+          <label for="fecha_termino">Fecha de termino</label>
+          <input type="datetime-local" name="fecha_termino" id="fecha_termino" ><br>
+
+          <label for="tema">Tema</label>
+          <select name="select_tema" id="select_tema" >
+              <option value="">Seleccione un Tema</option>
+          </select><br>
+
+          <label for="reason4" style="display: none;">Argumentos</label>
+          <textarea name="comments" id="comments4" rows="2" cols="30" style="display: none;"></textarea><br>
+
+          <label for="files">Pictures</label>
+          <input type="file" name="files" id="files" multiple accept="image/*,.pdf" required><br>
+          <div class="contenedor_botones">
+            <button type="button" class="btn_atras" id="3">Volver</button>
+            <button type="button" class="btn_agregar_actividad" id="31">Agregar Actividad</button>
+            
+          </div>
+
+
+        </form>
+
+    </div>
+      
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <script type="module" src="scripts/agregar_actividad.js"></script>
+  </body>
+</html>
