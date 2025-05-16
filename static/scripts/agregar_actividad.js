@@ -1,6 +1,6 @@
 async function obtener_regiones_y_comunas() {
   try {
-      const response = await fetch('region_comuna.json'); // Carga el archivo JSON
+      const response = await fetch('static/public/region_comuna.json'); // Carga el archivo JSON
       if (!response.ok) throw new Error('Error al cargar el JSON'); // Manejo de errores
       const data = await response.json(); // Convierte la respuesta en un objeto JS
       return data

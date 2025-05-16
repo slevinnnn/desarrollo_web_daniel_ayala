@@ -35,3 +35,36 @@ def actividades():
 def agregarActividad():
     return render_template("agregar_actividad.html")
 
+
+@app.route('/post-actividad', methods=['POST'])
+def post_actividad():
+    # Get form data
+    sector = request.form.get('sector')
+    nombre = request.form.get('nombre')
+    email = request.form.get('email')
+    celular = request.form.get('phone')
+    dia_hora_inicio = request.form.get('fecha_inicio')
+    dia_hora_termino = request.form.get('fecha__termino')
+    descripcion = request.form.get('descripcion')
+    comuna_id = request.form.get('comuna_id')
+
+    # Get uploaded files
+    files = request.files.getlist('fotos[]')
+
+    # Validate the form data
+    #if not validate_confession(sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion):
+    #    return "Invalid form data", 400
+
+    # Save the files
+    file_paths = []
+    for file in files:
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        file_paths.append(file_path)
+
+    # Save the activity to the database
+    db.save_activity(sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion, comuna_id, file_paths)
+
+    return redirect(url_for('actividades'))
+
