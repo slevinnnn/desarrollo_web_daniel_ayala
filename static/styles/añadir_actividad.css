@@ -36,7 +36,7 @@ img{
 }
 .contenedor_principal{
   border: 2px solid rgb(14,14,58);
-  width: 250px;
+  width: 350px;
   height: 80vh;
   overflow: hidden;
   background: white;
@@ -46,18 +46,22 @@ img{
   position: relative;
   background-color: azure;
 }
-.contenedor_formulario {
- /* border: 2px solid #ec0a0a;*/
+.formulario_unico {
+  border: 2px solid #ec0a0a;
   display: flex;
+  flex-direction: row;
   transition: transform 0.5s ease-in-out;
-  width: 320%; /* Cada paso ocupa 1/3 de este ancho */
+  width: 300%; /* Cada paso ocupa 1/3 de este ancho */
   height: 100%;
 }
 .formulario{
-  /*border: 2px solid #06f60a;*/
+  border: 2px solid #06f60a;
   margin-left: 15px;
   margin-right: 20px;
-  width:240px ;
+  width:33% ;
+  flex-shrink: 0;
+  padding: 20px;
+  box-sizing: border-box;
   font-weight: bold;
   display: flex;
   flex-direction: column;

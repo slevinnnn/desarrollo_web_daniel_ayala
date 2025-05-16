@@ -25,13 +25,13 @@ const  nextStep = (step) => {
   console.log(step)*/
     if (step >= 3) return;
     contador=step;
-    document.getElementById("contenedor_formulario").style.transform = `translateX(-${contador * 34}%)`;
+    document.getElementById("formulario_unico").style.transform = `translateX(-${contador * 37}%)`;
 }
 const  backStep = (step) => {
   /*console.log(contador)
   console.log(step)*/
     if (step <= 1) return;
-    document.getElementById("contenedor_formulario").style.transform = `translateX(-${(step-2)* 34}%)`;
+    document.getElementById("formulario_unico").style.transform = `translateX(-${(step-2)* 37}%)`;
 }
 
 document.querySelectorAll(".btn_siguiente").forEach((button) => {
