@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from utils.validations import validate_login_user, validate_register_user, validate_confession
-from database import db
+from database import db 
 from werkzeug.utils import secure_filename
 import hashlib
 import filetype
@@ -46,7 +46,12 @@ def post_actividad():
     dia_hora_inicio = request.form.get('fecha_inicio')
     dia_hora_termino = request.form.get('fecha__termino')
     descripcion = request.form.get('descripcion')
-    comuna_id = request.form.get('comuna_id')
+    comuna_id= request.form.get('select_comuna')
+    contactar_por = request.form.get('contactar_por')
+    contacto_id = request.form.get('comments3')
+    tema = request.form.get('select_tema')
+
+
 
     # Get uploaded files
     files = request.files.getlist('fotos[]')
@@ -64,7 +69,18 @@ def post_actividad():
         file_paths.append(file_path)
 
     # Save the activity to the database
-    db.save_activity(sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion, comuna_id, file_paths)
+    actividad_id=db.create_actividad(sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion, comuna_id)
 
-    return redirect(url_for('actividades'))
+    if contactar_por:
+        db.create_contactar_por(actividad_id,contactar_por, contacto_id)
+    else:
+        db.create_contactar_por(actividad_id)
+
+    if tema!="Otros":
+        db.create_tema(tema, actividad_id)
+    else:
+        tema_otro = request.form.get('comments4')
+        db.create_tema(tema,actividad_id,tema_otro)
+
+    return redirect(url_for('index'))
 

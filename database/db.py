@@ -83,7 +83,11 @@ class ActividadTema(Base):
 
 
 
-
+def get_comuna_by_name(comuna_name):
+    session = SessionLocal()
+    comuna = session.query(Comuna).filter(Comuna.nombre == comuna_name).first()
+    session.close()
+    return comuna.id if comuna else None
 
 
 def get_activities(page_size):
@@ -105,3 +109,20 @@ def create_actividad(comuna_id, sector, nombre, email, celular, dia_hora_inicio,
     session.add(new_actividad)
     session.commit()
     session.close()
+    return new_actividad.id  # Return the ID of the created activity
+
+def create_tema(tema, actividad_id, glosa_otro=None):
+    session = SessionLocal()
+    new_tema = ActividadTema(tema=tema, actividad_id=actividad_id, glosa_otro=glosa_otro)
+    session.add(new_tema)
+    session.commit()
+    session.close()
+
+def create_contactar_por(actividad_id, nombre=None, identificador=None):
+    session = SessionLocal()
+    new_contactar_por = ContactarPor(actividad_id=actividad_id,nombre=nombre, identificador=identificador )
+    session.add(new_contactar_por)
+    session.commit()
+    session.close()
+
+

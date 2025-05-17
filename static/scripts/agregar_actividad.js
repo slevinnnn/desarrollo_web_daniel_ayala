@@ -62,6 +62,20 @@ const poblarContactar =  () => {
   })
 }
 poblarContactar();
+function contactarPorChange() {
+  const temaSelect = document.getElementById("contactar_por");
+  const reasonLabel = document.querySelector("label[for='reason3']");
+  const reasonInput = document.getElementById("comments3");
+  reasonInput.value = "";
+
+  console.log("cambio a otros")
+  reasonLabel.innerText = "Ingrese id de contacto o URL";
+  reasonLabel.style.display = "";
+  reasonInput.style.display = "";
+
+}
+
+document.getElementById("contactar_por").addEventListener("change", contactarPorChange);
 
 const poblarRegion = async () => {
   let regionSelect = document.getElementById("select_region");
@@ -460,8 +474,18 @@ const validateForm = () => {
 };
 
 
-let submitBtn = document.getElementById("31");
-submitBtn.addEventListener("click", validateForm);
+/*let submitBtn = document.getElementById("31");
+submitBtn.addEventListener("click", validateForm);*/
+const agregarActividad = () => {
+  form_actividad = document.getElementById("formulario_unico");
+  /*let { confText, isValid } = validadorConfesion(confTextArea.value);
+  if (!isValid) {
+    return;
+  }*/
+  form_actividad.submit();
+};
+let submitActividadBtn = document.getElementById("31");
+submitActividadBtn.addEventListener("click", agregarActividad);
 
 
 

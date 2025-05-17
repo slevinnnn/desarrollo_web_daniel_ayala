@@ -16,7 +16,7 @@
         <ul id="val-list"></ul>
       </div>
 
-        <form class="formulario_unico"  id="formulario_unico" method="post" enctype="multipart/form-data">
+        <form class="formulario_unico" action="{{url_for('post_actividad')}}"  id="formulario_unico" method="post" enctype="multipart/form-data">
 
           <div class="formulario" id="formulario_quien">
             <label for="nombre">Nombre</label>
@@ -32,6 +32,10 @@
             <select name="contactar_por" id="contactar_por">
             <option value="">Seleccione una forma de contacto </option>
             </select><br>
+
+            <label for="reason3" style="display: none;"></label>
+            <input type="text" name="comments3" id="comments3" style="display: none;"></input>
+            <br>
 
             <div class="contenedor_botones">
               <button type="button" class="btn_atras" id="1">Volver</button>
