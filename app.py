@@ -69,7 +69,7 @@ def post_actividad():
         file_paths.append(file_path)
 
     # Save the activity to the database
-    actividad_id=db.create_actividad(sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion, comuna_id)
+    actividad_id=db.create_actividad(comuna_id,sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion)
 
     if contactar_por:
         db.create_contactar_por(actividad_id,contactar_por, contacto_id)

@@ -103,13 +103,18 @@ def get_activity_by_id(activity_id):
     return actividad
 
 def create_actividad(comuna_id, sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion):
-    session = SessionLocal()
+    #session = SessionLocal()
     new_actividad = Actividad(comuna_id=comuna_id, sector=sector, nombre=nombre, email=email, celular=celular,
                               dia_hora_inicio=dia_hora_inicio, dia_hora_termino=dia_hora_termino, descripcion=descripcion)
-    session.add(new_actividad)
-    session.commit()
-    session.close()
-    return new_actividad.id  # Return the ID of the created activity
+    
+    with SessionLocal() as session:
+        session.add(new_actividad)
+        session.commit()
+        session.refresh(new_actividad)  # ← Esto garantiza que el ID esté cargado
+        actividad_id = new_actividad.id  # ← Accede aquí, dentro del `with`
+    print(f"Actividad ID: {actividad_id}")  # Imprime el ID de la actividad creada   
+    return actividad_id
+
 
 def create_tema(tema, actividad_id, glosa_otro=None):
     session = SessionLocal()
