@@ -1,0 +1,16 @@
+.contenedor_principal{
+  display: flex;
+  width: 99vw;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: azure;
+  margin-top: 30px;
+}
+.contenedor_principal img{
+  width: 400px;
+  height: 35vh;
+  border: 2px solid rgb(14,14,68);
+  border-radius: 2ch;
+}

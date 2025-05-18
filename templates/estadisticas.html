@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Estadisticas{% endblock %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/estadisticas.css') }}"
+    />
+{% endblock %}
+{% block content %} 
+
+    <div class="contenedor_principal">
+    <img src="static/public/actividades_por_dia.png" alt="actividades_por_dia">
+    <img src="static/public/distribucion_por_tipo.png" alt="distribucion_por_tipo">
+    <img src="static/public/momento_inicio_actividad.png" alt="momento_inicio_actividad">
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+        <script type="module" src="{{ url_for('static', filename='') }}"></script>
+{% endblock %}
+  
+  
