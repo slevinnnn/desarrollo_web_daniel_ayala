@@ -75,7 +75,7 @@ class ContactarPor(Base):
 class ActividadTema(Base):
     __tablename__ = 'actividad_tema'
     id = Column(Integer, primary_key=True)
-    tema = Column(Enum("Musica","Deportes","Ciencias","Religion","Politica","Tecnologia","Juegos","Baile","Comida","Otros"))
+    tema = Column(Enum('música', 'deporte', 'ciencias', 'religión', 'política', 'tecnología', 'juegos', 'baile', 'comida', 'otro'))
     glosa_otro = Column(String(15))
     actividad_id = Column(Integer, ForeignKey('actividad.id'))
 
@@ -83,11 +83,11 @@ class ActividadTema(Base):
 
 
 
-def get_comuna_by_name(comuna_name):
+def get_comuna_by_id(comuna_id):
     session = SessionLocal()
-    comuna = session.query(Comuna).filter(Comuna.nombre == comuna_name).first()
+    comuna = session.query(Comuna).filter(Comuna.id == comuna_id).first()
     session.close()
-    return comuna.id if comuna else None
+    return comuna
 
 
 def get_activities(page_size):
@@ -95,6 +95,12 @@ def get_activities(page_size):
     actividades = session.query(Actividad).limit(page_size).all()
     session.close()
     return actividades
+
+def get_temas_by_activity_id(activity_id):
+    session = SessionLocal()
+    temas = session.query(ActividadTema).filter(ActividadTema.actividad_id == activity_id).all()
+    session.close()
+    return temas
 
 def get_activity_by_id(activity_id):
     session = SessionLocal()

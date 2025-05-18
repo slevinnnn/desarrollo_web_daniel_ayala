@@ -25,51 +25,24 @@
       </thead>
       <tbody>
         <!-- Puedes ir agregando filas como esta -->
-        <tr id="actividad1">
-          <td>2025-04-08T10:00</td>
-          <td>2025-04-08T13:00</td>
-          <td>Puente Alto</td>
-          <td>Centro</td>
-          <td>Medio Ambiente</td>
-          <td>Juan Pérez</td>
-          <td>12</td>
-        </tr>
-        <tr id="actividad2">
-          <td>2025-05-08T10:00</td>
-          <td>2025-05-08T13:00</td>
-          <td>Las Condes</td>
-          <td>Cerro las condes</td>
-          <td>deporte</td>
-          <td>Jan Pérez</td>
-          <td>12</td>
-        </tr>
-        <tr id="actividad3">
-          <td>2025-06-08T10:00</td>
-          <td>2025-06-08T13:00</td>
-          <td>Vitacura</td>
-          <td>parque de vitacura</td>
-          <td>musica</td>
-          <td>Jhon Pérez</td>
-          <td>12</td>
-        </tr>
-        <tr id="actividad4">
-          <td>2025-07-08T11:00</td>
-          <td>2025-07-08T13:00</td>
-          <td>Cerrillos</td>
-          <td>parque de cerrillos</td>
-          <td>ciencias</td>
-          <td>Jhun Pérez</td>
-          <td>12</td>
-        </tr>
-        <tr id="actividad5">
-          <td>2025-06-08T12:00</td>
-          <td>2025-06-08T13:00</td>
-          <td>providencia</td>
-          <td>parque ines de suarez </td>
-          <td>baile</td>
-          <td>Jhin Pérez</td>
-          <td>12</td>
-        </tr>
+         {% if actividades %}
+          {% for actividad in actividades %}
+          <tr>
+            <td>{{ actividad.dia_hora_inicio }}</td>
+            <td>{{ actividad.dia_hora_termino }}</td>
+            <td>{{ actividad.comuna }}</td>
+            <td>{{ actividad.sector }}</td>
+            <td>{{ actividad.tema }}</td>
+            <td>{{ actividad.nombre }}</td>
+            <td>{12}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="7">No hay actividades disponibles.</td>
+          </tr>
+        {% endif %}
+
       </tbody>
     </table>
 

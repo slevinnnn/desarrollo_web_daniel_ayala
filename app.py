@@ -25,11 +25,28 @@ def index():
 
 @app.route("/estadisticas")
 def estadisticas():
+
     return render_template("estadisticas.html")
 
-@app.route("/actividades")
+@app.route("/actividades", methods=["GET"])
 def actividades():
-    return render_template("actividades.html")
+    actividades =[]
+    for actividad in db.get_activities(5):
+        actividad_id = actividad.id
+        tema= db.get_temas_by_activity_id(actividad_id)
+        comuna_id = actividad.comuna_id
+        comuna = db.get_comuna_by_id(comuna_id)
+        actividades.append({
+            "comuna": comuna.nombre if comuna else "Desconocida",
+            "nombre": actividad.nombre,
+            "sector": actividad.sector,
+            "tema": tema[0].tema if tema else "Sin Tema",
+            "celular": actividad.celular,
+            "dia_hora_inicio": actividad.dia_hora_inicio,
+            "dia_hora_termino": actividad.dia_hora_termino,
+            "descripcion": actividad.descripcion
+        })
+    return render_template("actividades.html",actividades=actividades)
 
 @app.route("/agregar_actividad")
 def agregarActividad():
@@ -76,7 +93,7 @@ def post_actividad():
     else:
         db.create_contactar_por(actividad_id)
 
-    if tema!="Otros":
+    if tema!="otro":
         db.create_tema(tema, actividad_id)
     else:
         tema_otro = request.form.get('comments4')

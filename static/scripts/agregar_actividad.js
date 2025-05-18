@@ -15,7 +15,7 @@ async function obtener_regiones_y_comunas() {
 //data para todos los selects del formulario
 const regionesComunas=await obtener_regiones_y_comunas();
 const formaDeContacto=["Whatsapp","Telegram","X","Instagram","TikTok","Otra"];
-const temas=["Musica","Deportes","Ciencias","Religion","Politica","Tecnologia","Juegos","Baile","Comida","Otros"];
+const temas=['música', 'deporte', 'ciencias', 'religión', 'política', 'tecnología', 'juegos', 'baile', 'comida', 'otro'];
 // fin de la data para todos los selects del formulario
 
 //funcionalidad de avanzar,retroceder y enviar  en los botones del formulario
@@ -135,8 +135,8 @@ function changeArguments() {
   const reasonLabel = document.querySelector("label[for='reason4']");
   const reasonTextarea = document.getElementById("comments4");
   console.log(temaSelect.value);
-  if (temaSelect.value == "Otros") {
-      console.log("cambio a otros")
+  if (temaSelect.value == "otro") {
+      console.log("cambio a otro")
       reasonLabel.innerText = "Especifique el tema de la actividad";
       reasonLabel.style.display = "";
       reasonTextarea.style.display = "";
@@ -293,7 +293,7 @@ const validateFechaTermino = (fecha_inicio,fecha_termino) =>{
 
 const validateTema = (tema) => {
   if(!tema) return false;
-  if(tema=="Otros"){
+  if(tema=="otro"){
     let textarea=document.getElementById("comments4").value;
     if(textarea.length<3 || textarea.length>15) return false;
   }
