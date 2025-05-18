@@ -37,6 +37,17 @@
             <td>{12}</td>
           </tr>
           {% endfor %}
+          <div class="paginacion">
+            {% if page > 1 %}
+              <a href="{{ url_for('actividades', page=page-1) }}">← Anterior</a>
+            {% endif %}
+            
+            <span>Página {{ page }} de {{ total_pages }}</span>
+            
+            {% if page < total_pages %}
+              <a href="{{ url_for('actividades', page=page+1) }}">Siguiente →</a>
+            {% endif %}
+          </div>
         {% else %}
           <tr>
             <td colspan="7">No hay actividades disponibles.</td>

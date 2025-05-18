@@ -30,23 +30,33 @@ def estadisticas():
 
 @app.route("/actividades", methods=["GET"])
 def actividades():
+    # Obtener el número de página desde la URL, por defecto la 1
+    page = request.args.get("page", default=1, type=int)
+    per_page = 5
+    offset = (page - 1) * per_page
     actividades =[]
-    for actividad in db.get_activities(5):
+    total_actividades = db.get_total_activities()
+    for actividad in db.get_activities(per_page, offset):
         actividad_id = actividad.id
-        tema= db.get_temas_by_activity_id(actividad_id)
+        temas= db.get_temas_by_activity_id(actividad_id)
+        if temas[0].tema != "otro":
+            tema = temas[0].tema
+        else:
+            tema = temas[0].glosa_otro
         comuna_id = actividad.comuna_id
         comuna = db.get_comuna_by_id(comuna_id)
         actividades.append({
             "comuna": comuna.nombre if comuna else "Desconocida",
             "nombre": actividad.nombre,
             "sector": actividad.sector,
-            "tema": tema[0].tema if tema else "Sin Tema",
+            "tema": tema if temas else "Sin Tema",
             "celular": actividad.celular,
             "dia_hora_inicio": actividad.dia_hora_inicio,
             "dia_hora_termino": actividad.dia_hora_termino,
             "descripcion": actividad.descripcion
         })
-    return render_template("actividades.html",actividades=actividades)
+        total_pages = (total_actividades + per_page - 1) // per_page  # redondeo hacia arriba
+    return render_template("actividades.html",actividades=actividades,page=page, total_pages=total_pages)
 
 @app.route("/agregar_actividad")
 def agregarActividad():

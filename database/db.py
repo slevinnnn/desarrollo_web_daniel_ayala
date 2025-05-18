@@ -90,11 +90,17 @@ def get_comuna_by_id(comuna_id):
     return comuna
 
 
-def get_activities(page_size):
+def get_activities(limit, offset=0):
     session = SessionLocal()
-    actividades = session.query(Actividad).limit(page_size).all()
+    actividades = session.query(Actividad).order_by(Actividad.id).limit(limit).offset(offset).all()
     session.close()
     return actividades
+
+def get_total_activities():
+    session = SessionLocal()
+    total = session.query(Actividad).count()
+    session.close()
+    return total
 
 def get_temas_by_activity_id(activity_id):
     session = SessionLocal()
