@@ -89,6 +89,12 @@ def get_comuna_by_id(comuna_id):
     session.close()
     return comuna
 
+def get_region_by_id(region_id):
+    session = SessionLocal()
+    region = session.query(Region).filter(Region.id == region_id).first()
+    session.close()
+    return region
+
 
 def get_activities(limit, offset=0):
     session = SessionLocal()
@@ -139,6 +145,13 @@ def create_contactar_por(actividad_id, nombre=None, identificador=None):
     session = SessionLocal()
     new_contactar_por = ContactarPor(actividad_id=actividad_id,nombre=nombre, identificador=identificador )
     session.add(new_contactar_por)
+    session.commit()
+    session.close()
+
+def create_foto(actividad_id, ruta_archivo, nombre_archivo):
+    session = SessionLocal()
+    new_foto = Foto(actividad_id=actividad_id, ruta_archivo=ruta_archivo, nombre_archivo=nombre_archivo)
+    session.add(new_foto)
     session.commit()
     session.close()
 

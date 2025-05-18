@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-from utils.validations import validate_login_user, validate_register_user, validate_confession
+from utils.validations import actividad_valida
 from database import db 
 from werkzeug.utils import secure_filename
 import hashlib
@@ -74,26 +74,57 @@ def post_actividad():
     dia_hora_termino = request.form.get('fecha_termino')
     descripcion = request.form.get('descripcion')
     comuna_id= request.form.get('select_comuna')
+    region_id= request.form.get('select_region')
     contactar_por = request.form.get('contactar_por')
     contacto_id = request.form.get('comments3')
     tema = request.form.get('select_tema')
+    foto = request.files.get('files')
+    tema_otro = request.form.get('comments4')
 
+    region= db.get_region_by_id(region_id).nombre
+    comuna= db.get_comuna_by_id(comuna_id).nombre
 
+    data_validadora={
+        "region": region,
+        "comuna": comuna,
+        "sector": sector,
+        "nombre": nombre,
+        "email": email,
+        "celular": celular,
+        "contacto": contacto_id,
+        "dia_hora_inicio": dia_hora_inicio,
+        "dia_hora_termino": dia_hora_termino,
+        "tema": tema,
+        "glosa_otro": tema_otro,
+        "fotos": foto
+    }
 
     # Get uploaded files
     files = request.files.getlist('fotos[]')
 
-    # Validate the form data
-    #if not validate_confession(sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion):
-    #    return "Invalid form data", 400
+    #Validate the form data
+    if not actividad_valida(data_validadora):
+       return "Invalid form data", 400
 
     # Save the files
+    _filename = hashlib.sha256(
+        secure_filename(foto.filename) # nombre del archivo
+        .encode("utf-8") # encodear a bytes
+        ).hexdigest()
+    _extension = filetype.guess(foto).extension
+    img_filename = f"{_filename}.{_extension}"
+
+    # 2. save img as a file
+    foto.save(os.path.join(app.config["UPLOAD_FOLDER"], img_filename))
+
+    '''
     file_paths = []
     for file in files:
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
         file_paths.append(file_path)
+    '''
 
     # Save the activity to the database
     actividad_id=db.create_actividad(comuna_id,sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion)
@@ -108,6 +139,10 @@ def post_actividad():
     else:
         tema_otro = request.form.get('comments4')
         db.create_tema(tema,actividad_id,tema_otro)
+
+    # Save the photos to the database
+    db.create_foto(actividad_id, img_filename, foto.filename)
+   
 
     return redirect(url_for('index'))
 
