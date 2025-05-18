@@ -20,8 +20,8 @@ app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 # --- Routes ---
 @app.route("/")
 def index():
-    
-    return render_template("index.html")
+    actividades = db.get_historial_actividades()
+    return render_template("index.html", actividades=actividades)
 
 @app.route("/estadisticas")
 def estadisticas():

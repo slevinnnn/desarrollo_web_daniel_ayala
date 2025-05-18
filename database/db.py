@@ -156,3 +156,37 @@ def create_foto(actividad_id, ruta_archivo, nombre_archivo):
     session.close()
 
 
+def get_historial_actividades():
+    session = SessionLocal()
+    actividades = session.query(Actividad).order_by(Actividad.id.desc()).limit(5).all()
+    resultado = []
+
+    for act in actividades:
+        tema_obj = session.query(ActividadTema).filter_by(actividad_id=act.id).first()
+        if tema_obj:
+            tema = tema_obj.tema if tema_obj.tema != "otro" else tema_obj.glosa_otro
+        else:
+            tema = "Sin tema"
+
+        comuna = session.query(Comuna).filter_by(id=act.comuna_id).first()
+        comuna_nombre = comuna.nombre if comuna else "Desconocida"
+
+        fotos = session.query(Foto).filter_by(actividad_id=act.id).all()
+        if fotos:
+            foto_url = f"/static/uploads/{fotos[0].ruta_archivo}"
+        else:
+            foto_url = "/static/public/añadir.png"  # Imagen por defecto
+
+        resultado.append({
+            "dia_hora_inicio": act.dia_hora_inicio,
+            "dia_hora_termino": act.dia_hora_termino,
+            "comuna": comuna_nombre,
+            "sector": act.sector,
+            "tema": tema,
+            "foto_url": foto_url
+        })
+
+    return resultado
+
+
+
