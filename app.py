@@ -44,7 +44,7 @@ def post_actividad():
     email = request.form.get('email')
     celular = request.form.get('phone')
     dia_hora_inicio = request.form.get('fecha_inicio')
-    dia_hora_termino = request.form.get('fecha__termino')
+    dia_hora_termino = request.form.get('fecha_termino')
     descripcion = request.form.get('descripcion')
     comuna_id= request.form.get('select_comuna')
     contactar_por = request.form.get('contactar_por')

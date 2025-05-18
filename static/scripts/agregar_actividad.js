@@ -174,6 +174,8 @@ const poblarFechaInicio = () => {
 
   const formatted = `${year}-${month}-${day}T${hours}:${minutes}`;
   dateInput.value = formatted;
+  console.log(formatted);
+  console.log(dateInput.value);
 }
 poblarFechaInicio();
 
@@ -190,11 +192,18 @@ const poblarFechaTermino = () => {
 
   const formatted = `${year}-${month}-${day}T${hours}:${minutes}`;
   dateInput.value = formatted;
+  console.log(formatted);
+  console.log(dateInput.value);
 }
 poblarFechaTermino();
 
-//
+document.getElementById("fecha_termino").addEventListener("change", () => {
+  const fechaTermino = document.getElementById("fecha_termino").value;
+  let fechaTerminoInput = fechaTermino.value;
+  console.log(fechaTermino);
+  });
 
+//
 
 
 
