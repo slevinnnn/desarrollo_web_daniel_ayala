@@ -32,5 +32,5 @@ back_btn.addEventListener("click",function(){
 home_btn.addEventListener("click",function(){
   contenedorResumen.style.display="none";
   resumen.innerHTML="";
-  window.location.href="index.html";
+  window.location.href="/";
 });
