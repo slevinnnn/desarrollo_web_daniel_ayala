@@ -27,7 +27,7 @@
         <!-- Puedes ir agregando filas como esta -->
          {% if actividades %}
           {% for actividad in actividades %}
-          <tr>
+          <tr onclick="location.href='{{ url_for('resumen_actividad', id=actividad.id) }}'">
             <td>{{ actividad.dia_hora_inicio }}</td>
             <td>{{ actividad.dia_hora_termino }}</td>
             <td>{{ actividad.comuna }}</td>

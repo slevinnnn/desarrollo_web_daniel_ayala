@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Actividades{% endblock %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='') }}"
+    />
+{% endblock %}
+
+{% block content %}  
+<h1>resumen actividad</h1>
+{% if actividad %}
+    <div class="actividad-detalle">
+        <h2>Actividad Detalle</h2>
+        <p><strong>Inicio:</strong> {{ actividad.dia_hora_inicio }}</p>
+        <p><strong>Término:</strong> {{ actividad.dia_hora_termino }}</p>
+        <p><strong>Comuna:</strong> {{ comuna }}</p>
+        <p><strong>Sector:</strong> {{ actividad.sector }}</p>
+        <p><strong>Tema:</strong> {{ tema }}</p>
+        <p><strong>Nombre Organizador:</strong> {{ actividad.nombre }}</p>
+        <p><strong>Total Fotos:</strong> {{ actividad.total_fotos }}</p>
+    </div>
+{% else %}
+    <p>No hay detalles de la actividad disponibles.</p>
+{% endif %}
+
+
+
+{% endblock content %}  
+
+{% block javascript %}
+    <script type="module" src="{{ url_for('static', filename='') }}"></script>
+{% endblock %}

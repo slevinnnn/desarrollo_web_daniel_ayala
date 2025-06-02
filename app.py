@@ -55,6 +55,7 @@ def actividades():
         comuna_id = actividad.comuna_id
         comuna = db.get_comuna_by_id(comuna_id)
         actividades.append({
+            "id": actividad_id,
             "comuna": comuna.nombre if comuna else "Desconocida",
             "nombre": actividad.nombre,
             "sector": actividad.sector,
@@ -71,6 +72,23 @@ def actividades():
 def agregarActividad():
     return render_template("agregar_actividad.html")
 
+@app.route("/resumen_actividad/<int:id>", methods=["GET"])
+def resumen_actividad(id):
+    actividad = db.get_activity_by_id(id)
+    if not actividad:
+        return render_template("actividades.html", error="Actividad no encontrada")
+    temas = db.get_temas_by_activity_id(id)
+    comuna=db.get_comuna_by_id(actividad.comuna_id).nombre
+
+    if temas:
+        tema = temas[0].tema if temas[0].tema != "otro" else temas[0].glosa_otro
+    else:
+        tema = "Sin Tema"
+    
+    return render_template("resumen_actividad.html",actividad=actividad,
+                           comuna=comuna,
+                           tema=tema,
+                           total_fotos=1)
 
 @app.route('/post-actividad', methods=['POST'])
 def post_actividad():
