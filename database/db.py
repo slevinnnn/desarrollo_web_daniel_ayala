@@ -1,5 +1,11 @@
+from collections import defaultdict
 from sqlalchemy import create_engine, Column, Integer, BigInteger, String, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from collections import defaultdict
+from sqlalchemy import func
+from database import SessionLocal
+import json
+
 
 from sqlalchemy import DateTime,Enum
 DB_NAME = "tarea2"
@@ -187,6 +193,54 @@ def get_historial_actividades():
         })
 
     return resultado
+
+def obtener_datos_actividades():
+    session = SessionLocal()
+    datos = {}
+
+    # 1. Actividades por día (gráfico de líneas)
+    actividades_por_dia = session.query(
+        func.date(Actividad.dia_hora_inicio), func.count()
+    ).group_by(func.date(Actividad.dia_hora_inicio)).all()
+
+    datos['actividades_por_dia'] = [
+        {"fecha": fecha.strftime("%Y-%m-%d"), "cantidad": cantidad}
+        for fecha, cantidad in actividades_por_dia
+    ]
+
+    # 2. Actividades por tipo (gráfico de torta)
+    actividades_por_tipo = session.query(
+        ActividadTema.tema, func.count()
+    ).group_by(ActividadTema.tema).all()
+
+    datos['actividades_por_tipo'] = [
+        {"tipo": tipo, "cantidad": cantidad}
+        for tipo, cantidad in actividades_por_tipo
+    ]
+
+    # 3. Actividades por mes y franja horaria (gráfico de barras)
+    actividades = session.query(Actividad.dia_hora_inicio).all()
+
+    franjas_por_mes = defaultdict(lambda: {"mañana": 0, "mediodía": 0, "tarde": 0})
+
+    for (inicio,) in actividades:
+        mes = inicio.strftime("%Y-%m")
+        hora = inicio.hour
+        if 6 <= hora < 12:
+            franja = "mañana"
+        elif 12 <= hora < 18:
+            franja = "mediodía"
+        else:
+            franja = "tarde"
+        franjas_por_mes[mes][franja] += 1
+
+    datos['actividades_por_mes_y_turno'] = [
+        {"mes": mes, "mañana": val["mañana"], "mediodía": val["mediodía"], "tarde": val["tarde"]}
+        for mes, val in sorted(franjas_por_mes.items())
+    ]
+
+    session.close()
+    return datos
 
 
 

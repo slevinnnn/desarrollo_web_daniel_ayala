@@ -2,6 +2,8 @@ from flask import Flask, request, render_template, redirect, url_for, session
 from utils.validations import actividad_valida
 from database import db 
 from werkzeug.utils import secure_filename
+from db import obtener_datos_actividades
+from flask import jsonify
 import hashlib
 import filetype
 import os
@@ -27,6 +29,13 @@ def index():
 def estadisticas():
 
     return render_template("estadisticas.html")
+
+@app.route("/api/estadisticas")
+def api_estadisticas():
+    datos = obtener_datos_actividades()  # Esta función prepara los datos desde SQLAlchemy
+    return jsonify(datos)
+
+
 
 @app.route("/actividades", methods=["GET"])
 def actividades():
