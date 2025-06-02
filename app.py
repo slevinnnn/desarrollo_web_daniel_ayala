@@ -1,8 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from utils.validations import actividad_valida
-from database import db 
+from database import db
+from database.db import obtener_datos_actividades
 from werkzeug.utils import secure_filename
-from db import obtener_datos_actividades
 from flask import jsonify
 import hashlib
 import filetype

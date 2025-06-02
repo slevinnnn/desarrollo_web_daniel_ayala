@@ -11,14 +11,21 @@
 {% block content %} 
 
     <div class="contenedor_principal">
-    <img src="static/public/actividades_por_dia.png" alt="actividades_por_dia">
-    <img src="static/public/distribucion_por_tipo.png" alt="distribucion_por_tipo">
-    <img src="static/public/momento_inicio_actividad.png" alt="momento_inicio_actividad">
+        <h2>Actividades por Día</h2>
+        <canvas id="graficoLineas"></canvas>
+
+        <h2>Actividades por Tipo</h2>
+        <canvas id="graficoTorta"></canvas>
+
+        <h2>Actividades por Mes y Turno</h2>
+        <canvas id="graficoBarras"></canvas>
     </div>
 {% endblock content %}
 
 {% block javascript %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="module" src="{{ url_for('static', filename='scripts/estadisticas.js') }}"></script>
+        
 {% endblock %}
   
   

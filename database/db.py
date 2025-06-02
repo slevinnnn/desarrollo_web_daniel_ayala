@@ -3,7 +3,6 @@ from sqlalchemy import create_engine, Column, Integer, BigInteger, String, Forei
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 from collections import defaultdict
 from sqlalchemy import func
-from database import SessionLocal
 import json
 
 
