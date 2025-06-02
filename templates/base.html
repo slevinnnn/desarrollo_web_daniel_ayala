@@ -18,10 +18,18 @@
   <body>
     <nav class="navbar">
       <div class="navbar_menu">
-        <a href="{{ url_for('index') }}"> <img src="static/public/home-logo.jpeg"></img></a>
-        <a href="{{ url_for('agregarActividad') }}"> <img src="static/public/añadir.png"></img></a>
-        <a href="{{ url_for('estadisticas') }}"> <img src="static/public/Estadisticas-de-ventas.jpg"></img></a>
-        <a href="{{ url_for('actividades') }}"> <img src="static/public/actividades_3.jpg"></img></a>
+        <a href="{{ url_for('index') }}">
+          <img src="{{ url_for('static', filename='public/home-logo.jpeg') }}" alt="Inicio" />
+        </a>
+        <a href="{{ url_for('agregarActividad') }}">
+          <img src="{{ url_for('static', filename='public/añadir.png') }}" alt="Agregar actividad" />
+        </a>
+        <a href="{{ url_for('estadisticas') }}">
+          <img src="{{ url_for('static', filename='public/Estadisticas-de-ventas.jpg') }}" alt="Estadísticas" />
+        </a>
+        <a href="{{ url_for('actividades') }}">
+          <img src="{{ url_for('static', filename='public/actividades_3.jpg') }}" alt="Actividades" />
+        </a>
       </div>
     </nav>
   </body>
