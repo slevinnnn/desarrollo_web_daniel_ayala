@@ -8,17 +8,16 @@
         href="{{ url_for('static', filename='styles/estadisticas.css') }}"
     />
 {% endblock %}
-{% block content %} 
-
+{% block content %}
     <div class="contenedor_principal">
         <h2>Actividades por Día</h2>
-        <canvas id="graficoLineas"></canvas>
+        <canvas  class="grafico" id="graficoLineas"></canvas>
 
         <h2>Actividades por Tipo</h2>
-        <canvas id="graficoTorta"></canvas>
+        <canvas class="grafico" id="graficoTorta"></canvas>
 
-        <h2>Actividades por Mes y Turno</h2>
-        <canvas id="graficoBarras"></canvas>
+        <h2>Actividades por Mes y horario del dia</h2>
+        <canvas class="grafico" id="graficoBarras"></canvas>
     </div>
 {% endblock content %}
 

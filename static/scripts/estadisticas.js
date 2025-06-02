@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     borderColor: "blue",
                     tension: 0.1
                 }]
+            },
+            options:{
+                responsive: false
             }
         });
     }
@@ -40,6 +43,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                         "red", "orange", "yellow", "green", "blue", "purple", "pink", "cyan", "gray", "brown"
                     ]
                 }]
+            },
+            options: {
+                responsive: false
             }
         });
     }
@@ -75,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 ]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 scales: {
                     x: {
                         stacked: false
