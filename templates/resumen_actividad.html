@@ -44,8 +44,15 @@
             <ul>
               {% for comentario in comentarios %}
                 <li>
-                  <strong>{{ comentario.nombre }}</strong>: {{ comentario.comentario }}
-                  <span class="fecha_comentario">{{ comentario.fecha }}</span>
+                  <div class="detalles_comentario">
+                    <div class="datos_comentario">
+                      <strong>{{ comentario.nombre }}</strong>
+                      <span class="fecha_comentario">{{ comentario.fecha }}</span>
+                    </div>
+                    <div class="cuadro_comentario">
+                      <p style="color: royalblue;">{{ comentario.comentario }}</p>
+                    </div>
+                  </div>
                 </li>
               {% endfor %}
             </ul>
