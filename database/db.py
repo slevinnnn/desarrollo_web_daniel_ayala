@@ -55,6 +55,7 @@ class Actividad(Base):
     fotos = relationship("Foto", back_populates="actividad")
     formas_contacto = relationship("ContactarPor", back_populates="actividad")
     temas = relationship("ActividadTema", back_populates="actividad")
+    comentarios = relationship("Comentario", back_populates="actividad")
 
 
 class Foto(Base):
@@ -85,6 +86,16 @@ class ActividadTema(Base):
     actividad_id = Column(Integer, ForeignKey('actividad.id'))
 
     actividad = relationship("Actividad", back_populates="temas")
+
+class Comentario(Base):
+    __tablename__ = 'comentario'
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String(80),nullable=False)
+    comentario = Column("texto", String(300), nullable=False) 
+    fecha = Column(DateTime, nullable=False)
+    actividad_id = Column(Integer, ForeignKey('actividad.id'))
+
+    actividad = relationship("Actividad", back_populates="comentarios")
 
 
 
@@ -124,6 +135,11 @@ def get_activity_by_id(activity_id):
     actividad = session.query(Actividad).filter(Actividad.id == activity_id).first()
     session.close()
     return actividad
+def get_comentarios_by_activity_id(activity_id):
+    session = SessionLocal()
+    comentarios = session.query(Comentario).filter(Comentario.actividad_id == activity_id).all()
+    session.close()
+    return comentarios
 
 def create_actividad(comuna_id, sector, nombre, email, celular, dia_hora_inicio, dia_hora_termino, descripcion):
     #session = SessionLocal()
@@ -137,6 +153,13 @@ def create_actividad(comuna_id, sector, nombre, email, celular, dia_hora_inicio,
         actividad_id = new_actividad.id  # ← Accede aquí, dentro del `with`
     print(f"Actividad ID: {actividad_id}")  # Imprime el ID de la actividad creada   
     return actividad_id
+
+def create_comentario(nombre, comentario, fecha,actividad_id):
+    session = SessionLocal()
+    new_comentario = Comentario(nombre=nombre, comentario=comentario, fecha=fecha, actividad_id=actividad_id)
+    session.add(new_comentario)
+    session.commit()
+    session.close()
 
 
 def create_tema(tema, actividad_id, glosa_otro=None):

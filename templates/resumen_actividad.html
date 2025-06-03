@@ -5,22 +5,60 @@
 {% block css %}
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='') }}"
+        href="{{ url_for('static', filename='styles/resumen_actividad.css') }}"
     />
 {% endblock %}
 
-{% block content %}  
-<h1>resumen actividad</h1>
+{% block content %} 
+<div class="contenedor_principal">
 {% if actividad %}
-    <div class="actividad-detalle">
-        <h2>Actividad Detalle</h2>
-        <p><strong>Inicio:</strong> {{ actividad.dia_hora_inicio }}</p>
-        <p><strong>Término:</strong> {{ actividad.dia_hora_termino }}</p>
-        <p><strong>Comuna:</strong> {{ comuna }}</p>
-        <p><strong>Sector:</strong> {{ actividad.sector }}</p>
-        <p><strong>Tema:</strong> {{ tema }}</p>
-        <p><strong>Nombre Organizador:</strong> {{ actividad.nombre }}</p>
-        <p><strong>Total Fotos:</strong> {{ actividad.total_fotos }}</p>
+    <div class="actividad_detalle">
+        <h2>Resumen de la Actividad</h2>
+        <h3><strong>Inicio:</strong> {{ actividad.dia_hora_inicio }}</h3>
+        <h3><strong>Término:</strong> {{ actividad.dia_hora_termino }}</h3>
+        <h3><strong>Comuna:</strong> {{ comuna }}</h3>
+        <h3><strong>Sector:</strong> {{ actividad.sector }}</h3>
+        <h3><strong>Tema:</strong> {{ tema }}</h3>
+        <h3><strong>Nombre Organizador:</strong> {{ actividad.nombre }}</h3>
+        <h3><strong>Total Fotos:</strong> {{ total_fotos }}</h3>
+        <div class="contenedor_agregar_comentario" id="contenedor_agregar_comentario">
+          <img src="{{ url_for('static', filename='public/agregar_comentario.png') }}" alt="agregar_comentario">
+          <h2>Agregar Comentario</h2>
+        </div>
+    </div>
+
+    <div class="contenedor_secundario">
+      <form action="{{url_for('post_comentario',actividad_id=actividad.id)}}" id="formulario_comentario" method="post" style="display: none;">
+        <div class="formulario_comentario">
+          <label for="nombre_comentario">Nombre Autor</label>
+          <input type="text" name="nombre_comentario" id="nombre_comentario" form="formulario_comentario" maxlength="80"><br>
+          <label for="comentario">Comentario</label>
+          <textarea name="comentario" id="comentario" form="formulario_comentario" cols="50" rows="4"></textarea>
+          <input type="hidden" name="actividad_id" value="{{ actividad.id }}">
+          <button type="submit" class="btn_enviar_comentario">Agregar Comentario</button>
+        </div>
+      </form>
+        <div class="contenedor_comentarios">
+          <h2>Comentarios</h2>
+          {% if comentarios %}
+            <ul>
+              {% for comentario in comentarios %}
+                <li>
+                  <strong>{{ comentario.nombre }}</strong>: {{ comentario.comentario }}
+                  <span class="fecha_comentario">{{ comentario.fecha }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>No hay comentarios para esta actividad.</p>
+          {% endif %}
+        </div>
+
+</div>
+
+    <div class="contenedor_validador" id="contenedor_validador" hidden>
+        <h2 id="val-msg"></h2>
+        <ul id="val-list"></ul>
     </div>
 {% else %}
     <p>No hay detalles de la actividad disponibles.</p>
@@ -31,5 +69,5 @@
 {% endblock content %}  
 
 {% block javascript %}
-    <script type="module" src="{{ url_for('static', filename='') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='scripts/resumen_actividad.js') }}"></script>
 {% endblock %}

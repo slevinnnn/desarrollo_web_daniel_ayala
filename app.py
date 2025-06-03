@@ -1,7 +1,8 @@
+from datetime import datetime
 from flask import Flask, request, render_template, redirect, url_for, session
 from utils.validations import actividad_valida
 from database import db
-from database.db import obtener_datos_actividades
+from database.db import obtener_datos_actividades,get_comentarios_by_activity_id
 from werkzeug.utils import secure_filename
 from flask import jsonify
 import hashlib
@@ -84,11 +85,12 @@ def resumen_actividad(id):
         tema = temas[0].tema if temas[0].tema != "otro" else temas[0].glosa_otro
     else:
         tema = "Sin Tema"
+    comentarios = db.get_comentarios_by_activity_id(id)
     
     return render_template("resumen_actividad.html",actividad=actividad,
                            comuna=comuna,
                            tema=tema,
-                           total_fotos=1)
+                           total_fotos=1,comentarios=comentarios)
 
 @app.route('/post-actividad', methods=['POST'])
 def post_actividad():
@@ -172,4 +174,17 @@ def post_actividad():
    
 
     return redirect(url_for('index'))
+
+@app.route("/post_comentario/<int:actividad_id>", methods=["POST"])
+def post_comentario(actividad_id):
+    if not actividad_id:
+        return "Actividad no encontrada", 404
+    nombre_autor = request.form.get('nombre_comentario')
+    comentario = request.form.get('comentario')
+    fecha = datetime.now()
+
+    db.create_comentario(nombre_autor, comentario, fecha, actividad_id=actividad_id)
+
+    return redirect(url_for('resumen_actividad', id=actividad_id))
+
 
