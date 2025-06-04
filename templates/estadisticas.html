@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Estadisticas{% endblock %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/estadisticas.css') }}"
+    />
+{% endblock %}
+{% block content %}
+    <div class="contenedor_principal">
+        <h2>Actividades por Día</h2>
+        <canvas  class="grafico" id="graficoLineas"></canvas>
+
+        <h2>Actividades por Tipo</h2>
+        <canvas class="grafico" id="graficoTorta"></canvas>
+
+        <h2>Actividades por Mes y horario del dia</h2>
+        <canvas class="grafico" id="graficoBarras"></canvas>
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="{{ url_for('static', filename='scripts/estadisticas.js') }}"></script>
+        
+{% endblock %}
+  
+  

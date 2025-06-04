@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/base.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar_menu">
+        <a href="{{ url_for('index') }}">
+          <img src="{{ url_for('static', filename='public/home-logo.jpeg') }}" alt="Inicio" />
+        </a>
+        <a href="{{ url_for('agregarActividad') }}">
+          <img src="{{ url_for('static', filename='public/añadir.png') }}" alt="Agregar actividad" />
+        </a>
+        <a href="{{ url_for('estadisticas') }}">
+          <img src="{{ url_for('static', filename='public/Estadisticas-de-ventas.jpg') }}" alt="Estadísticas" />
+        </a>
+        <a href="{{ url_for('actividades') }}">
+          <img src="{{ url_for('static', filename='public/actividades_3.jpg') }}" alt="Actividades" />
+        </a>
+      </div>
+    </nav>
+  </body>
+  <section class="main-container">
+    {% block content %}{% endblock %} 
+    {% block javascript %}{% endblock %}
+  </section>
+</html>

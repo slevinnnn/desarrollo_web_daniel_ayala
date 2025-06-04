@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="static/styles/index.css">
+
+  </head>
+  <body>
+    <header class="encabezado">
+      <h1>Bienvenido a Activity Tracker</h1>
+      <h3>lleva el registro de todas las actividades cerca tuyo</h3>
+    </header>
+    <div class="contenedor_principal">
+      <div class="caja">
+        <a href="{{ url_for('agregarActividad') }}">
+          <img src="static/public/añadir.png" alt="Agregar Actividad" class="icono">
+        </a>
+      </div>
+      <div class="caja">
+        <a href="{{ url_for('actividades') }}">
+          <img src="static/public/actividades_3.jpg" alt="actividades" class="icono">
+        </a>
+      </div>
+      <div class="caja">
+        <a href="{{ url_for('estadisticas') }}">
+          <img src="static/public/Estadisticas-de-ventas.jpg" alt="estadisticas" class="icono">
+        </a>
+      </div>
+    </div>
+    <div class="contenedor_historial">
+      <h2>Historial de Actividades</h2>
+      <table border="1" id="mi_tabla">
+        <thead>
+          <tr>
+            <th>Inicio</th>
+            <th>Término</th>
+            <th>Comuna</th>
+            <th>Sector</th>
+            <th>Tema</th>
+            <th>Fotos</th>
+          </tr>
+        </thead>
+        <tbody id="historial_actividades">
+        {% for actividad in actividades %}
+        <tr>
+          <td>{{ actividad.dia_hora_inicio }}</td>
+          <td>{{ actividad.dia_hora_termino }}</td>
+          <td>{{ actividad.comuna }}</td>
+          <td>{{ actividad.sector }}</td>
+          <td>{{ actividad.tema }}</td>
+          <td><img src="{{ actividad.foto_url }}" alt="foto {{ actividad.tema }}"></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+
+
+
+
+    <script type="module" src=""></script>
+  </body>
+</html>
