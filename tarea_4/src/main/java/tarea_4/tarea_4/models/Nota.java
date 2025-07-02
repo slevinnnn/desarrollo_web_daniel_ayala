@@ -1,4 +1,4 @@
-package main.java.tarea_4.tarea_4.models;
+package tarea_4.tarea_4.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
