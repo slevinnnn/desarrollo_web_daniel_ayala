@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividades Realizadas</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <h1>Actividades Realizadas</h1>
+
+    <table id="tabla-actividades" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha Inicio</th>
+                <th>Sector</th>
+                <th>Nombre</th>
+                <th>Tema</th>
+                <th>Nota</th>
+                <th>Evaluar</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Modal oculto por defecto -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Evaluar Actividad</h2>
+            <p id="modal-actividad-id">ID: -</p>
+            <label for="nota-select">Seleccione nota:</label>
+            <select id="nota-select">
+                <option value="" disabled selected>-- Seleccionar --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <div class="modal-buttons">
+                <button onclick="cerrarModal()">Cancelar</button>
+                <button onclick="enviarNota()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
+
