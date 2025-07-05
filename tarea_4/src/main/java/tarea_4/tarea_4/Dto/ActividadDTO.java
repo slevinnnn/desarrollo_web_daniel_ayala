@@ -5,7 +5,7 @@ import tarea_4.tarea_4.models.Actividad;
 import java.time.LocalDate;
 
 public class ActividadDTO {
-    private Long id;
+    private int id;
     private LocalDate fechaInicio;
     private String sector;
     private String nombre;
@@ -26,7 +26,7 @@ public class ActividadDTO {
 
     // Getters...
      // Getters obligatorios para serializar como JSON
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

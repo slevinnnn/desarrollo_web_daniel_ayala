@@ -10,7 +10,7 @@ public class Actividad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private LocalDate fechaInicio;
     private String nombre;
@@ -27,7 +27,7 @@ public class Actividad {
     }
 
     // Getters y setters
-    public Long getId() { return id; }
+    public int getId() { return id; }
     public LocalDate getFechaInicio() { return fechaInicio; }
     public String getNombre() { return nombre; }
     public String getSector() { return sector; }
