@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Actividades{% endblock %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/actividades.css') }}"
+    />
+{% endblock %}
+
+{% block content %}  
+
+    <table border="1" id="mi_tabla">
+      <thead>
+        <tr>
+          <th>Inicio</th>
+          <th>Término</th>
+          <th>Comuna</th>
+          <th>Sector</th>
+          <th>Tema</th>
+          <th>Nombre Organizador</th>
+          <th>Total Fotos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Puedes ir agregando filas como esta -->
+         {% if actividades %}
+          {% for actividad in actividades %}
+          <tr onclick="location.href='{{ url_for('resumen_actividad', id=actividad.id) }}'">
+            <td>{{ actividad.dia_hora_inicio }}</td>
+            <td>{{ actividad.dia_hora_termino }}</td>
+            <td>{{ actividad.comuna }}</td>
+            <td>{{ actividad.sector }}</td>
+            <td>{{ actividad.tema }}</td>
+            <td>{{ actividad.nombre }}</td>
+            <td>12</td>
+          </tr>
+          {% endfor %}
+          <div class="paginacion">
+            {% if page > 1 %}
+              <a href="{{ url_for('actividades', page=page-1) }}">← Anterior</a>
+            {% endif %}
+            
+            <span>Página {{ page }} de {{ total_pages }}</span>
+            
+            {% if page < total_pages %}
+              <a href="{{ url_for('actividades', page=page+1) }}">Siguiente →</a>
+            {% endif %}
+          </div>
+        {% else %}
+          <tr>
+            <td colspan="7">No hay actividades disponibles.</td>
+          </tr>
+        {% endif %}
+
+      </tbody>
+    </table>
+
+
+    <div class="contenedor_resumen" id="contenedor_resumen" style="display: none;">
+      <div id="resumen" class="resumen"></div>
+      <div class="cont_btn">
+        <button id="back_btn" class="back_btn">Volver</button>
+        <button id="home_btn" class="home_btn">Home</button>
+      </div>
+    </div>
+
+{% endblock content %}  
+
+{% block javascript %}
+    <script type="module" src="{{ url_for('static', filename='') }}"></script>
+{% endblock %}

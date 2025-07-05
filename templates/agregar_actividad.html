@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Añadir Actividad{% endblock %}
+
+{% block css %}
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles/añadir_actividad.css') }}"
+    />
+{% endblock %}
+
+{% block content %} 
+    <div class="contenedor_principal">
+      <div class="contenedor_validador" id="contenedor_validador" hidden>
+        <h2 id="val-msg"></h2>
+        <ul id="val-list"></ul>
+      </div>
+
+        <form class="formulario_unico" action="{{url_for('post_actividad')}}"  id="formulario_unico" method="post" enctype="multipart/form-data">
+
+          <div class="formulario" id="formulario_quien">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" maxlength="80"><br>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email"><br>
+
+            <label for="phone">Phone</label>
+            <input type="tel" name="phone" id="phone" minlength="8"><br>
+
+            <label for="contactar_por">Forma de contacto</label>
+            <select name="contactar_por" id="contactar_por">
+            <option value="">Seleccione una forma de contacto </option>
+            </select><br>
+
+            <label for="reason3" style="display: none;"></label>
+            <input type="text" name="comments3" id="comments3" style="display: none;"></input>
+            <br>
+
+            <div class="contenedor_botones">
+              <button type="button" class="btn_atras" id="1">Volver</button>
+              <button type="button" class="btn_siguiente" id="1">Siguiente</button>
+            </div>
+          </div>
+
+          <div class="formulario" id="formulario_donde">
+            <label for="select_region">Region</label>
+            <select name="select_region" id="select_region">
+            <option value="">Seleccione una Region</option>
+            </select><br>
+
+            <label for="select_comuna">Comuna</label>
+            <select name="select_comuna" id="select_comuna">
+            <option value="">Seleccione una comuna</option>
+            </select><br>
+
+            <label for="sector">Sector</label>
+            <input type="text" name="sector" id="sector" maxlength="100"><br>
+
+            <input type="text" name="comments" id="comments" style="display: none;"><br>
+
+            <div class="contenedor_botones">
+              <button type="button" class="btn_atras" id="2">Volver</button>
+              <button type="button" class="btn_siguiente" id="2">Siguiente</button>
+            </div>
+          </div>
+
+          <div class="formulario" id="formulario_cuando">
+            <label for="fecha_inicio">Fecha de inicio</label>
+            <input type="datetime-local" name="fecha_inicio" id="fecha_inicio"><br>
+
+            <label for="fecha_termino">Fecha de termino</label>
+            <input type="datetime-local" name="fecha_termino" id="fecha_termino"><br>
+
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion" rows="10" cols="50"></textarea><br>
+
+            <label for="select_tema">Tema</label>
+            <select name="select_tema" id="select_tema">
+            <option value="">Seleccione un Tema</option>
+            </select><br>
+
+            <label for="reason4" style="display: none;">Argumentos</label>
+            <textarea name="comments4" id="comments4" rows="2" cols="30" style="display: none;"></textarea><br>
+
+            <label for="files">Pictures</label>
+            <input type="file" name="files" id="files" multiple accept="image/*,.pdf" required><br>
+
+            <div class="contenedor_botones">
+              <button type="button" class="btn_atras" id="3">Volver</button>
+              <button type="submit" class="btn_agregar_actividad" id="31">Agregar Actividad</button>
+            </div>
+          </div>
+        </form>
+
+    </div>
+
+
+
+
+{% endblock content %}
+
+{% block javascript %}
+    <script type="module" src="{{ url_for('static', filename='scripts/agregar_actividad.js') }}"></script>
+{% endblock %}
+
