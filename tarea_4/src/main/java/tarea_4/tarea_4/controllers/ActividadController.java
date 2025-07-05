@@ -31,10 +31,10 @@ public class ActividadController {
         LocalDate hoy = LocalDate.now();
         List<Actividad> actividades = actividadRepository.findByFechaInicioBefore(hoy);
         return actividades.stream()
-                .map(ActividadDTO::new)
+                .map(a-> new ActividadDTO(a))
                 .collect(Collectors.toList());
     }
-}
+
 
     // 🟢 POST /api/actividades/{id}/nota
     @PostMapping("/{id}/nota")
@@ -54,5 +54,10 @@ public class ActividadController {
         nota.setValor(valor);
         nota.setActividad(actividad);
         notaRepository.save(nota);
+        // ✅ Devuelve el nuevo promedio actualizado como respuesta
+        double nuevoPromedio = actividad.getPromedioNotas();
+        return ResponseEntity.ok(String.format("%.2f", nuevoPromedio));
+    }
+}
 
 

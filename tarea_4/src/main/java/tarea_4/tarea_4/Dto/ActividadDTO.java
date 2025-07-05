@@ -11,6 +11,7 @@ public class ActividadDTO {
     private String nombre;
     private String tema;
     private String nota;
+    private int comuna_id;
 
     public ActividadDTO(Actividad actividad) {
         this.id = actividad.getId();
@@ -18,6 +19,7 @@ public class ActividadDTO {
         this.sector = actividad.getSector();
         this.nombre = actividad.getNombre();
         this.tema = actividad.getTema();
+        this.comuna_id=actividad.getComuna_id();
         double promedio = actividad.getPromedioNotas();
         this.nota = promedio == -1 ? "-" : String.format("%.2f", promedio);
     }
@@ -47,5 +49,7 @@ public class ActividadDTO {
     public String getNota() {
         return nota;
     }
+    public int getComuna_id(){
+        return comuna_id;}
 }
 

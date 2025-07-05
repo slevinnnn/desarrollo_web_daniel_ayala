@@ -16,6 +16,7 @@ public class Actividad {
     private String nombre;
     private String sector;
     private String tema;
+    private int comuna_id;
 
     @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Nota> notas = new ArrayList<>();
@@ -31,6 +32,7 @@ public class Actividad {
     public String getNombre() { return nombre; }
     public String getSector() { return sector; }
     public String getTema() { return tema; }
+    public int getComuna_id(){return comuna_id;}
     public List<Nota> getNotas() { return notas; }
 
     public void setFechaInicio(LocalDate fechaInicio) { this.fechaInicio = fechaInicio; }
@@ -38,6 +40,7 @@ public class Actividad {
     public void setSector(String sector) { this.sector = sector; }
     public void setTema(String tema) { this.tema = tema; }
     public void setNotas(List<Nota> notas) { this.notas = notas; }
+    public void setComuna_id(int comuna_id){this.comuna_id=comuna_id;}
 }
 
 
